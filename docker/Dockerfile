@@ -38,8 +38,8 @@ ENV PATH=/opt/conda/bin:$PATH
 SHELL ["/bin/bash", "-c"]
 
 # https://github.com/haosulab/ManiSkill/issues/9
-COPY nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
-COPY nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
+COPY docker/nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
+COPY docker/nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
 
 # install dependencies
 RUN pip install --upgrade mani-skill==3.0.0b22 && pip cache purge
@@ -47,3 +47,5 @@ RUN pip install torch
 
 # download physx GPU binary via sapien
 RUN python -c "exec('import sapien.physx as physx;\ntry:\n  physx.enable_gpu()\nexcept:\n  pass;')"
+
+WORKDIR /workspace

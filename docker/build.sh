@@ -1,1 +1,1 @@
-sudo docker build -t maniskill:latest -f Dockerfile .
+sudo docker build -t maniskill:latest -f docker/Dockerfile .
