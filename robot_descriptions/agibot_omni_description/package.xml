@@ -1,0 +1,20 @@
+<package format="2">
+  <name>agibot_omni_description</name>
+  <version>1.0.0</version>
+  <description>
+    <p>URDF Description package for Agibot Omni Picker and Hand</p>
+    <p>This package contains configuration data, 3D models and launch files
+      for omni-picker
+    </p>
+  </description>
+
+  <maintainer email="biao876990970@hotmail.com">Huang Zhenbiao</maintainer>
+  <license>TODO</license>
+
+  <exec_depend>robot_common_launch</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>
