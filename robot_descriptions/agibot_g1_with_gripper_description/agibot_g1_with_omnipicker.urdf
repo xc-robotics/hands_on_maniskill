@@ -638,13 +638,13 @@
   <link name="right_eef"/>
   <joint name="right_eef_joint" type="fixed">
     <!-- 根据法兰盘的厚度调整z值，default给个0.015  -->
-    <origin xyz="0.0 0.0 0.015"/> 
+    <origin xyz="0.0 0.0 0.015" rpy="0 0 1.5707963267948966"/> 
     <parent link="right_end_link"/>
     <child link="right_eef"/>
   </joint>
   <link name="left_eef"/>
   <joint name="left_eef_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.015"/>
+    <origin xyz="0.0 0.0 0.015" rpy="0 0 1.5707963267948966"/>
     <parent link="left_end_link"/>
     <child link="left_eef"/>
   </joint>
@@ -1118,5 +1118,53 @@
     <!-- 如果左右朝向需要对称，可以这里加一个 yaw=π 之类 -->
     <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
+
+    <!-- camera stand -->
+  <joint name="left_camera_stand_joint" type="fixed">
+    <origin xyz="0 0 0.004"/>
+    # 
+    <parent link="left_end_link"/>
+    <child link="left_camera_stand"/>
+  </joint>
+  <link name="left_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="package://agibot_g1_description/meshes/camera/omni_picker_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="right_camera_stand_joint" type="fixed">
+    <origin xyz="0 0 0.004"/>
+    <parent link="right_end_link"/>
+    <child link="right_camera_stand"/>
+  </joint>
+  <link name="right_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="package://agibot_g1_description/meshes/camera/omni_picker_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="left_camera_joint" type="fixed">
+    <origin xyz="0 -0.07754 0.028618" rpy="0 -1.117 1.5708"/>
+    <parent link="left_camera_stand"/>
+    <child link="dummy_left_camera"/>
+  </joint>
+  
+  <link name="dummy_left_camera">
+    <visual>
+      <geometry>
+        <!-- <mesh filename="file://$(find sensor_models)/meshes/d405/d405.obj"/> -->
+        <!-- Create a 10cm long stick pointing in +X direction -->
+        <box size="0.10 0.02 0.02"/>  
+      </geometry>
+      <!-- Make it visible -->
+      <material name="camera_visual_color">
+          <color rgba="0.1 0.7 1.0 1.0"/>  <!-- blue-ish -->
+      </material>
+    </visual>
+  </link>
 </robot>
 

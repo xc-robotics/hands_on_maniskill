@@ -649,8 +649,56 @@
 
   <link name="left_eef"/>
   <joint name="left_eef_joint" type="fixed">
+    <!-- 根据法兰盘的厚度调整z值，default给个0.15 -->
     <origin xyz="0.0 0.0 0.15"/>
     <parent link="left_end_link"/>
     <child link="left_eef"/>
   </joint>
+
+  <!-- camera stand -->
+  <joint name="left_camera_stand_joint" type="fixed">
+    <origin xyz="0 0 0.004"/>
+    <parent link="left_end_link"/>
+    <child link="left_camera_stand"/>
+  </joint>
+  <link name="left_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="package://agibot_g1_description/meshes/camera/omni_picker_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="right_camera_stand_joint" type="fixed">
+    <origin xyz="0 0 0.004"/>
+    <parent link="right_end_link"/>
+    <child link="right_camera_stand"/>
+  </joint>
+  <link name="right_camera_stand">
+    <visual>
+      <geometry>
+        <mesh filename="package://agibot_g1_description/meshes/camera/omni_picker_camera_stand.obj"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint_name="left_camera_joint" type="fixed">
+    <origin xyz="0 -0.07754 0.028618" rpy="0 -1.117 1.5708"/>
+    <parent link="left_camera_stand"/>
+    <child link="dummy_left_camera"/>
+  </joint>
+  
+  <link name="dummy_left_camera">
+    <visual>
+      <geometry>
+        <!-- <mesh filename="file://$(find sensor_models)/meshes/d405/d405.obj"/> -->
+        <!-- Create a 10cm long stick pointing in +X direction -->
+        <box size="0.10 0.02 0.02"/>  
+      </geometry>
+      <!-- Make it visible -->
+      <material name="camera_visual_color">
+          <color rgba="0.1 0.7 1.0 1.0"/>  <!-- blue-ish -->
+      </material>
+    </visual>
+  </link>
 </robot>
