@@ -1,4 +1,4 @@
-xhost +local:docker
+xhost +
 
 sudo docker run -it --rm \
 --gpus all \

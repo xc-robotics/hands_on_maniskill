@@ -1,0 +1,1 @@
+- support docker ref: https://github.com/haosulab/ManiSkill/tree/main/docker
